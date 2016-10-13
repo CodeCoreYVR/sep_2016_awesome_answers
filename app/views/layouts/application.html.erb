@@ -15,6 +15,10 @@
     <!-- <a href='/contact'>Contact Us</a> -->
     <%#= link_to 'Contact Us', contact_path({something: 'hello world'}) %>
     <%= link_to 'Contact Us', contact_url %>
+    |
+    <%= link_to 'All Questions', questions_path %>
+    |
+    <%= link_to 'New Question', new_question_path %>
     <hr>
     <%= yield %>
   </body>

@@ -1,0 +1,21 @@
+<h1>Edit Question</h1>
+<%= @question.errors.full_messages.join(', ') %>
+
+<%# if the object you pass to the form_for is persisted (has an id in the DB)
+    then Rails will automatically make the form submit a PATCH request with
+    URL in this case question_path(@question) (same as show link with PATCH
+    request).
+    @question variable is persisted in this case so it will have a title and
+    a body so those will be pre-populated in their respective fields %>
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>

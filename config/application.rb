@@ -18,6 +18,10 @@ Bundler.require(*Rails.groups)
 
 module AwesomeAnswers
   class Application < Rails::Application
+    # this will make sending unpermitted parameters raise an exception instead
+    # of just logging it.
+    # config.action_controller.action_on_unpermitted_parameters = :raise
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
