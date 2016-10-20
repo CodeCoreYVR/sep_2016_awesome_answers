@@ -44,6 +44,7 @@ class QuestionsController < ApplicationController
   # URL: /questions/:id (for example /questions/123)
   # METHOD: GET
   def show
+    @answer = Answer.new
     # render plain: "In show action"
   end
 

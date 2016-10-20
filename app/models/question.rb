@@ -1,4 +1,15 @@
 class Question < ApplicationRecord
+
+  # This sets up the one to many association from the question model. You always
+  # provide plural form of the model, in this case it's `answers`
+  # this will give us handy methods to easily work with the association
+  # you must provide a `dependent` option to your `has_many`
+  # You can put `:destroy` if you'd like to delete all the answers associated
+  # with a question when the question gets deleted.
+  # You can also put `:nullify` which will update all the associated answers
+  # to have a `question_id` of `NULL` when the question is deleted.
+  has_many :answers, lambda { order(created_at: :DESC) }, dependent: :destroy
+
   validates :title, presence: true,
                     uniqueness: { case_sensitive: false,
                                   message: 'must be unique' }

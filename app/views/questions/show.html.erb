@@ -1,4 +1,5 @@
 <h1><%= @question.title %></h1>
+
 <p><%= @question.body %></p>
 
 <%= link_to 'edit', edit_question_path(@question) %>
@@ -6,3 +7,22 @@
 <%= link_to 'delete', question_path(@question),
                       method: :delete,
                       data: { confirm: 'Are you sure?' } %>
+
+<h2>All Answers</h2>
+<%= @answer.errors.full_messages.join(', ') %>
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= form_for [@question, @answer] do |f| %>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<% @question.answers.each do |ans| %>
+  <%= ans.body %>
+  <%= link_to 'delete', question_answer_path(@question, ans),
+                        method: :delete,
+                        data: { confirm: 'are you sure?' } %>
+  <hr>
+<% end %>
