@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
   # before_action :find_question, except: [:index, :new, :create]
   # before_action(:find_question, {only: [:edit, :update, :destroy, :show]})
   before_action :find_question, only: [:edit, :update, :destroy, :show]
+  before_action :authenticate_user, except: [:index, :show]
 
   # this action is to show the form for creating a new question
   # the URL: /questions/new
@@ -20,6 +21,7 @@ class QuestionsController < ApplicationController
   # that was shown in the new action
   def create
     @question = Question.new question_params
+    @question.user = current_user
     if @question.save
       # redirect_to question_path({id: @question.id})
       # redirect_to question_path({id: @question})

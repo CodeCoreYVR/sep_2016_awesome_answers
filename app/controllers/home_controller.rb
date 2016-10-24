@@ -5,6 +5,9 @@ class HomeController < ApplicationController
     # views/layouts/application.html.erb
     # render :index, layout: 'application'
     # the line above is the conventional default so we can do without it
+
+    cookies[:last_visited] = Time.now
+    cookies[:lucky_number] = rand(100)
   end
 
   def contact

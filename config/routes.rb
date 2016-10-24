@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   # this means when we receive a GET request with `/` url we invoke the index
   # action within the Home Controller
-  get '/' => 'home#index', as: :home
-  # root 'home#index'
+  # get '/' => 'home#index', as: :home
+  root 'home#index'
 
+  resources :users, only: [:create, :new]
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
 
-  resources :questions do
+  resources :questions, shallow: true do
     # When we define a route within the block for `resources` we make the route
     # associated with the questions controller. We have different options we
     # can use with these routes:
@@ -32,7 +36,9 @@ Rails.application.routes.draw do
     # `/questions/:question_id`. We will need the `question_id` to create
     # an answer associated with a question so we will stick with this way of
     # defining the routes. The routes helpers will also have `question_` prefix
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
   # the url helpers (when we set it using `as`) is only concerned about the

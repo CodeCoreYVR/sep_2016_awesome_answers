@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  belongs_to :user
 
   # This sets up the one to many association from the question model. You always
   # provide plural form of the model, in this case it's `answers`

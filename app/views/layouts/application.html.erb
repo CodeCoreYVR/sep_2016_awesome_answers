@@ -10,7 +10,7 @@
 
   <body>
     <!-- <a href='/'>Home</a> -->
-    <%= link_to 'Home', home_path %>
+    <%= link_to 'Home', root_path %>
     |
     <!-- <a href='/contact'>Contact Us</a> -->
     <%#= link_to 'Contact Us', contact_path({something: 'hello world'}) %>
@@ -19,6 +19,15 @@
     <%= link_to 'All Questions', questions_path %>
     |
     <%= link_to 'New Question', new_question_path %>
+
+    <% if user_signed_in? %>
+      Hello <%= current_user.first_name %>
+      <%= link_to 'Sign out', sessions_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign up', new_user_path %>
+      <%= link_to 'Sign In', new_session_path %>
+    <% end %>
+
     <hr>
     <%#= flash[:notice] || flash[:alert] %>
     <%= notice || alert %>
