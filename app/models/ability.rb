@@ -17,6 +17,10 @@ class Ability
       q.user == user
     end
 
+    can :delete, Answer do |a|
+      a.user == user || a.question.user == user
+    end
+
     if user.admin?
       can :manage, :all
     else

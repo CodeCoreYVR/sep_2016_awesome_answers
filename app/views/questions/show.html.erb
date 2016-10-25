@@ -27,8 +27,10 @@
 
 <% @question.answers.each do |ans| %>
   <%= ans.body %>
-  <%= link_to 'delete', answer_path(ans),
-                        method: :delete,
-                        data: { confirm: 'are you sure?' } %>
+  <% if can? :delete, ans %>
+    <%= link_to 'delete', answer_path(ans),
+                          method: :delete,
+                          data: { confirm: 'are you sure?' } %>
+  <% end %>
   <hr>
 <% end %>

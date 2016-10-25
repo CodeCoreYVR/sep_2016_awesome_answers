@@ -4,6 +4,9 @@
     <title>AwesomeAnswers</title>
     <%= csrf_meta_tags %>
 
+    <%# this refers to the application.css manifest file so in development it
+        will include all teh files individual css files. In production it will
+        only include the application.css compiled file. %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

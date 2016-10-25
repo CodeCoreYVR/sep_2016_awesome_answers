@@ -16,8 +16,13 @@ class AnswersController < ApplicationController
 
   def destroy
     answer = Answer.find params[:id]
-    question = answer.question
-    answer.destroy
-    redirect_to question_path(question), notice: 'Answer deleted!'
+    if can? :delete, answer
+      question = answer.question
+      answer.destroy
+      redirect_to question_path(question), notice: 'Answer deleted!'
+    else
+      redirect_to root_path, alert: 'access denied'
+    end
   end
+
 end
