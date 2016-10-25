@@ -32,6 +32,14 @@ class Question < ApplicationRecord
     limit(10).order(created_at: :desc)
   end
 
+  def user_full_name
+    if user
+      user.full_name
+    else
+      'Anonymous'
+    end
+  end
+
   private
 
   def no_monkey

@@ -7,8 +7,17 @@ class QuestionsController < ApplicationController
   # that this `before_action` method applies to.
   # before_action :find_question, except: [:index, :new, :create]
   # before_action(:find_question, {only: [:edit, :update, :destroy, :show]})
-  before_action :find_question, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_user, except: [:index, :show]
+  before_action :find_question, only: [:edit, :update, :destroy, :show]
+
+  # The before_action methods will be executed at the order that they get
+  # defined with. This means the `authenticate_user` will be called before
+  # the `authorize_access` method. This means that the user will be
+  # authenticated when we're inside the `authorize_access` method so we don't
+  # have to check for that.
+  before_action :authorize_access, only: [:edit, :update, :destroy]
+
+
 
   # this action is to show the form for creating a new question
   # the URL: /questions/new
@@ -96,5 +105,12 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find params[:id]
+  end
+
+  def authorize_access
+    unless can? :manage, @question
+      # head :unauthorized # this will send an empty HTTP response with 401 code
+      redirect_to root_path, alert: 'access denied'
+    end
   end
 end

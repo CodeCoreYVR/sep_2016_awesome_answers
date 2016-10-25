@@ -34,6 +34,8 @@ gem 'cowsay'
 
 gem 'faker'
 
+gem 'cancancan'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

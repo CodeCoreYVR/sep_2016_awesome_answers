@@ -2,11 +2,17 @@
 
 <p><%= @question.body %></p>
 
-<%= link_to 'edit', edit_question_path(@question) %>
+<p>
+  Created By: <%= @question.user_full_name %>
+</p>
 
-<%= link_to 'delete', question_path(@question),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
+<% if can? :manage, @question %>
+  <%= link_to 'edit', edit_question_path(@question) %>
+
+  <%= link_to 'delete', question_path(@question),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+<% end %>
 
 <h2>All Answers</h2>
 <%= @answer.errors.full_messages.join(', ') %>
@@ -21,7 +27,7 @@
 
 <% @question.answers.each do |ans| %>
   <%= ans.body %>
-  <%= link_to 'delete', question_answer_path(@question, ans),
+  <%= link_to 'delete', answer_path(ans),
                         method: :delete,
                         data: { confirm: 'are you sure?' } %>
   <hr>
