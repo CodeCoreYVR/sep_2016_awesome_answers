@@ -24,6 +24,9 @@ class Question < ApplicationRecord
 
   validate :no_monkey
 
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
+
   after_initialize :set_defaults
   before_validation :titleize_title
 
