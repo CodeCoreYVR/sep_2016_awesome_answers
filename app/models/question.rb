@@ -43,6 +43,10 @@ class Question < ApplicationRecord
     end
   end
 
+  def like_for(user)
+    likes.find_by(user: user)
+  end
+
   private
 
   def no_monkey

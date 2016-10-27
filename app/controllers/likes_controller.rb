@@ -5,7 +5,9 @@ class LikesController < ApplicationController
     question = Question.find params[:question_id]
     like = Like.new(user: current_user, question: question)
 
-    if like.save
+    if cannot? :like, question
+      redirect_to :back, notice: "💢 Access Denied 💢"
+    elsif like.save
       redirect_to :back, notice: "✨Thanks for liking✨"
     else
       redirect_to :back, alert: like.errors.full_messages.join(", ")
