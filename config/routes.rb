@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy] do
       resources :comments, only: [:create, :destroy]
     end
+
+    resources :likes, only: [:create, :destroy]
   end
 
   # the url helpers (when we set it using `as`) is only concerned about the
