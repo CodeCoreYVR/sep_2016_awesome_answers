@@ -17,6 +17,14 @@ class Ability
       q.user == user
     end
 
+    cannot :like, Question do |q|
+      q.user == user
+    end
+
+    can :like, Question do |q|
+      q.user != user
+    end
+
     can :delete, Answer do |a|
       a.user == user || a.question.user == user
     end

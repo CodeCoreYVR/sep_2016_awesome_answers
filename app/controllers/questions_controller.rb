@@ -56,6 +56,7 @@ class QuestionsController < ApplicationController
   # METHOD: GET
   def show
     @answer = Answer.new
+    @like = @question.like_for(current_user)
     # render plain: "In show action"
   end
 
