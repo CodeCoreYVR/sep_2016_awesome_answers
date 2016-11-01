@@ -24,6 +24,23 @@
 
 (<%= pluralize @question.likes.count, "like" %>)
 
+<section class="vote-widget">
+  <% vote = @question.votes.find_by(user: current_user) %>
+  <%= link_to(
+    fa_icon("arrow-up"),
+    question_votes_path(@question, vote: { is_up: true }),
+    method: :post,
+    class: "vote-link #{vote&.is_up? ? 'vote-up' : ''}"
+    ) %>
+
+  <%= link_to(
+    fa_icon("arrow-down"),
+    question_votes_path(@question, vote: { is_up: false }),
+    method: :post,
+    class: "vote-link #{!(vote&.is_up?) ? 'vote-down' : ''}"
+    ) %>
+</section>
+
 <h2>All Answers</h2>
 <%= @answer.errors.full_messages.join(', ') %>
 <%#= form_for @answer, url: question_answers_path(@question) do |f| %>

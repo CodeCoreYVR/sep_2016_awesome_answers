@@ -4,3 +4,15 @@
 .field_with_errors input, .field_with_errors textarea {
   border-color: red;
 }
+
+.vote-link {
+  color: Grey;
+}
+
+.vote-link.vote-up {
+  color: Orange;
+}
+
+.vote-link.vote-down {
+  color: Blue;
+}
