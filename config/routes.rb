@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     end
 
     resources :likes, only: [:create, :destroy]
+    resources :votes, only: [:create, :destroy, :update]
   end
 
   # the url helpers (when we set it using `as`) is only concerned about the
