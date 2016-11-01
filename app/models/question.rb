@@ -30,6 +30,9 @@ class Question < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   after_initialize :set_defaults
   before_validation :titleize_title
 

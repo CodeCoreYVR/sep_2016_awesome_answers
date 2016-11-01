@@ -30,6 +30,10 @@
   <%= @question.vote_value %>
 </section>
 
+<section class="tag-widget">
+  Tags: <%= @question.tags.map(&:name).join(', ') %>
+</section>
+
 <h2>All Answers</h2>
 <%= @answer.errors.full_messages.join(', ') %>
 <%#= form_for @answer, url: question_answers_path(@question) do |f| %>
