@@ -11,6 +11,21 @@ class VotesController < ApplicationController
     end
   end
 
+  def destroy
+    question = vote.question
+    vote.destroy
+    redirect_to question_path(question)
+  end
+
+  def update
+    question = vote.question
+    if vote.update vote_params
+      redirect_to question_path(question)
+    else
+      redirect_to question_path(question), alert: vote.error_description
+    end
+  end
+
   private
   def vote_params
     params.require(:vote).permit(:is_up)
@@ -20,5 +35,9 @@ class VotesController < ApplicationController
     # ||= equivalent to
     # @question = @question || Question.find params[:question_id]
     @question ||= Question.find params[:question_id]
+  end
+
+  def vote
+    @vote ||= Vote.find params[:id]
   end
 end

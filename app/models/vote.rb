@@ -7,4 +7,8 @@ class Vote < ApplicationRecord
   # without using inclusion validation, presence would
   # take a false value has not present
   validates :is_up, inclusion: { in: [true, false]}
+
+  def is_down?
+    is_up == false
+  end
 end

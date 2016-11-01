@@ -26,18 +26,51 @@
 
 <section class="vote-widget">
   <% vote = @question.votes.find_by(user: current_user) %>
+  <% upvote_method = if vote.nil?
+                      :post
+                    elsif vote.is_up?
+                      :delete
+                    else
+                      :patch
+                    end
+  %>
+
+  <% upvote_path = if vote.nil?
+    question_votes_path(@question, vote: { is_up: true })
+  else
+    vote_path(vote, vote: { is_up: true })
+  end %>
+
   <%= link_to(
     fa_icon("arrow-up"),
-    question_votes_path(@question, vote: { is_up: true }),
-    method: :post,
+    upvote_path,
+    method: upvote_method,
     class: "vote-link #{vote&.is_up? ? 'vote-up' : ''}"
     ) %>
 
+    <% downvote_method = if vote.nil?
+                        :post
+                      elsif vote.is_down?
+                        :delete
+                      else
+                        :patch
+                      end
+    %>
+
+    <% downvote_path = if vote.nil?
+      question_votes_path(@question, vote: { is_up: false })
+    else
+      #if your path is not shallow
+      #question_vote_path(@question, vote, vote: {is_up: false})
+      vote_path(vote, vote: { is_up: false })
+    end %>
+
   <%= link_to(
     fa_icon("arrow-down"),
-    question_votes_path(@question, vote: { is_up: false }),
-    method: :post,
-    class: "vote-link #{!(vote&.is_up?) ? 'vote-down' : ''}"
+    downvote_path,
+    method: downvote_method,
+    # vote&.is_down? is equivalent to vote && vote.is_down?
+    class: "vote-link #{vote&.is_down? ? 'vote-down' : ''}"
     ) %>
 </section>
 
