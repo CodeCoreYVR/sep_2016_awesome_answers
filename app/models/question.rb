@@ -27,6 +27,9 @@ class Question < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
   after_initialize :set_defaults
   before_validation :titleize_title
 
