@@ -56,8 +56,26 @@
       </div>
     </nav>
 
-    <%#= flash[:notice] || flash[:alert] %>
-    <%= notice || alert %>
+    <% if notice || alert %>
+      <%# the ternary is used to set the alert type based on whether we received
+      notification or an alert %>
+      <div
+        class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable"
+        role="alert">
+        <%= notice || alert %>
+
+        <%# add x button to close notification element %>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>
