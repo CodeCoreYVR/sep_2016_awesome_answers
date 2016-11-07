@@ -1,56 +1,62 @@
-<h1><%= @question.title %></h1>
-
-<p><%= @question.body %></p>
-
-<p>
-  Created By: <%= @question.user_full_name %>
-</p>
-
-<% if can? :manage, @question %>
-  <%= link_to 'edit', edit_question_path(@question) %>
-
-  <%= link_to 'delete', question_path(@question),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-<% if user_signed_in? && can?(:like, @question) %>
-  <% if @like.present?  %>
-    <%= link_to "Un-Like", like_path(@like), method: :delete %>
-  <% else %>
-    <%= link_to "Like", question_likes_path(@question), method: :post %>
-  <% end %>
-<% end %>
-
-(<%= pluralize @question.likes.count, "like" %>)
-
-<section class="vote-widget">
-  <%= upvote_link @question %>
-  <%= downvote_link @question %>
-  <%= @question.vote_value %>
-</section>
-
-<section class="tag-widget">
-  Tags: <%= @question.tags.map(&:name).join(', ') %>
-</section>
-
-<h2>All Answers</h2>
-<%= @answer.errors.full_messages.join(', ') %>
-<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
-<%= form_for [@question, @answer] do |f| %>
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+<div class="row">
+  <div class="col-xs-2 col-sm-1">
+    <section class="vote-widget">
+      <%= upvote_link @question %>
+      <h2><%= @question.vote_value %></h2>
+      <%= downvote_link @question %>
+    </section>
   </div>
-  <%= f.submit %>
-<% end %>
 
-<% @question.answers.each do |ans| %>
-  <%= ans.body %>
-  <% if can? :delete, ans %>
-    <%= link_to 'delete', answer_path(ans),
-                          method: :delete,
-                          data: { confirm: 'are you sure?' } %>
+  <div class="col-xs-10 col-sm-11 question-show">
+    <h1><%= @question.title %></h1>
+    <p><%= @question.body %></p>
+    <p>
+      Created By: <%= @question.user_full_name %>
+    </p>
+
+    <% if can? :manage, @question %>
+      <%= link_to 'edit', edit_question_path(@question) %>
+
+      <%= link_to 'delete', question_path(@question),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+    <% if user_signed_in? && can?(:like, @question) %>
+      <% if @like.present?  %>
+        <%= link_to "Un-Like", like_path(@like), method: :delete %>
+      <% else %>
+        <%= link_to "Like", question_likes_path(@question), method: :post %>
+      <% end %>
+    <% end %>
+
+    (<%= pluralize @question.likes.count, "like" %>)
+
+    <section class="tag-widget">
+      Tags: <%= @question.tags.map(&:name).join(', ') %>
+    </section>
+  </div>
+</div>
+
+<div class="row">
+  <h2>All Answers</h2>
+  <%= @answer.errors.full_messages.join(', ') %>
+  <%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+  <%= form_for [@question, @answer] do |f| %>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+    </div>
+    <%= f.submit %>
   <% end %>
-  <hr>
-<% end %>
+
+  <% @question.answers.each do |ans| %>
+    <%= ans.body %>
+    <% if can? :delete, ans %>
+      <%= link_to 'delete', answer_path(ans),
+                            method: :delete,
+                            data: { confirm: 'are you sure?' } %>
+    <% end %>
+    <hr>
+  <% end %>
+</div>
