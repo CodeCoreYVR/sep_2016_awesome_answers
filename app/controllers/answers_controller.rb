@@ -7,10 +7,24 @@ class AnswersController < ApplicationController
     @answer          = Answer.new answer_params
     @answer.question = @question
     @answer.user     = current_user
-    if @answer.save
-      redirect_to question_path(@question), notice: 'Answer created!'
-    else
-      render 'questions/show'
+
+    # AJAX with Rails
+    # 1. use remote: true (for forms or links)
+    # 2. make sure to respond to the js format
+    # 3. use jQuery (or plain js) to render partials in order to make the views
+    #    look the way you want them to. This minimizes the amount of js you will
+    #    have to write
+
+    respond_to do |format|
+      if @answer.save
+        format.js { render :create_success }
+        format.html do
+          redirect_to question_path(@question), notice: 'Answer created!'
+        end
+      else
+        format.js { render :create_failure }
+        format.html { render 'questions/show' }
+      end
     end
   end
 

@@ -42,40 +42,16 @@
 <hr/>
 
 <div class="row">
-    <%= @answer.errors.full_messages.join(', ') %>
-    <div class="col-xs-12">
-      <%= form_for [@question, @answer] do |f| %>
-        <div class="form-group">
-          <%= f.label :body %>
-          <%= f.text_area :body, class: "form-control" %>
-        </div>
-        <%= f.submit class: "btn btn-default" %>
-      <% end %>
-
-      <hr/>
-    </div>
-
-    <% @question.answers.each do |ans| %>
-      <%# <div class="col-xs-12 col-sm-6 col-lg-3"> %>
-      <div class="col-xs-12">
-        <div class="row">
-          <div class="col-xs-11">
-            <%= ans.body %>
-          </div>
-
-          <div class="col-xs-1">
-            <% if can? :delete, ans %>
-              <%= link_to answer_path(ans),
-                method: :delete,
-                data: { confirm: 'are you sure?' },
-                class: "pull-right" do %>
-                <span class="glyphicon glyphicon-trash"></span>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <hr>
-      </div>
+  <div id='answer-form'>
+    <%= render '/answers/form' %>
+  </div>
+  <div id='answers'>
+    <% @question.answers.each do |answer| %>
+      <%# ans will be a local variable in the partial we're rendering. Partials
+          share the same instance variable as the file they're rendered from
+          but if you want a local variable then you will have to pass it in  %>
+      <%= render('/answers/answer', { ans: answer }) %>
     <% end %>
   </div>
+</div>
 </div>

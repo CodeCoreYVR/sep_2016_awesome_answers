@@ -65,6 +65,12 @@ class QuestionsController < ApplicationController
   # METHOD: GET
   def index
     @questions = Question.order(created_at: :desc)
+    respond_to do |format|
+      format.html { render }
+      format.text { render }
+      format.xml  { render xml: @questions }
+      format.json { render json: @questions.to_json }
+    end
   end
 
   # this action is to show a form pre-populated with the question's data

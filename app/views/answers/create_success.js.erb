@@ -1,0 +1,11 @@
+// we want to add an `answer` partil and prepend it to the list of partials that
+// are rendered inside the div with id `answers`
+// we should use the `j` method to escape characters for javascript.
+$('#answers').prepend("<%= j render 'answer', ans: @answer %>");
+
+<%# If we want to render the `form` partial, then we will have to re-instantiate
+    the `@answer` object because in the create action of the answers controller
+    `@answer` is now a persisted Answer object which makes the form submit to
+    the update action instead of the create action %>
+<% @answer = Answer.new %>
+$('#answer-form').html('<%= j render 'form' %>');
