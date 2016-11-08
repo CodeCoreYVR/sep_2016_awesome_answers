@@ -1,4 +1,8 @@
-<div class="col-xs-12">
+<%# dom_id generate an id to uniquely identify an ActiveRecord object, it
+    uses the object type (in the case answer) and it adds the object id with
+    `_` between the type and id. So if the `ans` object has an id of 55 the
+    generate id will be `answer_55` %>
+<div class="col-xs-12" id="<%= dom_id(ans) %>">
   <div class="row">
     <div class="col-xs-11">
       <%= ans.body %>
@@ -7,9 +11,10 @@
     <div class="col-xs-1">
       <% if can? :delete, ans %>
         <%= link_to answer_path(ans),
-          method: :delete,
-          data: { confirm: 'are you sure?' },
-          class: "pull-right" do %>
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: 'are you sure?' },
+                    class: "pull-right" do %>
           <span class="glyphicon glyphicon-trash"></span>
         <% end %>
       <% end %>

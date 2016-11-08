@@ -29,13 +29,17 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    answer = Answer.find params[:id]
-    if can? :delete, answer
-      question = answer.question
-      answer.destroy
-      redirect_to question_path(question), notice: 'Answer deleted!'
-    else
-      redirect_to root_path, alert: 'access denied'
+    @answer = Answer.find params[:id]
+    respond_to do |format|
+      if can? :delete, @answer
+        question = @answer.question
+        @answer.destroy
+        format.html { redirect_to question, notice: 'Answer deleted!' }
+        format.js   { render } # destroy.js.erb
+      else
+        format.html { redirect_to root_path, alert: 'access denied' }
+        format.js   { render js: 'alert("access denied");' }
+      end
     end
   end
 
