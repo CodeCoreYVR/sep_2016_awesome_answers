@@ -35,7 +35,7 @@ gem 'chosen-rails'
 gem 'cowsay'
 
 gem 'faker'
-
+gem 'rack-cors'
 gem 'cancancan'
 
 # Use Capistrano for deployment
