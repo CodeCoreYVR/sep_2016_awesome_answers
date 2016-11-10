@@ -58,6 +58,13 @@ class QuestionsController < ApplicationController
     @answer = Answer.new
     @like = @question.like_for(current_user)
     # render plain: "In show action"
+
+    respond_to do |format|
+      format.html { render }
+      format.text { render }
+      format.xml  { render xml: @question }
+      format.json { render json: @question.to_json }
+    end
   end
 
   # this action is to show a listings of all the questions
