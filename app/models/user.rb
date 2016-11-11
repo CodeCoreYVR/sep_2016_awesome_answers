@@ -30,6 +30,12 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :voted_questions, through: :votes, source: :question
 
+  has_many :followings
+  has_many :followers, through: :followings
+
+  has_many :stalkings, foreign_key: :follower_id, class_name: 'Following'
+  has_many :followed_users, through: :stalkings, source: :user
+
   def full_name
     "#{first_name} #{last_name}".strip.squeeze(' ').titleize
   end
