@@ -49,6 +49,14 @@ class Question < ApplicationRecord
     end
   end
 
+  def user_first_name
+    user ? user.first_name : 'Anonymous'
+  end
+
+  def user_last_name
+    user ? user.last_name : 'Anonymous'
+  end
+
   def like_for(user)
     likes.find_by(user: user)
   end

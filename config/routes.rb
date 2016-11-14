@@ -4,6 +4,16 @@ Rails.application.routes.draw do
   # get '/' => 'home#index', as: :home
   root 'home#index'
 
+  namespace :admin do
+    resources :questions
+  end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :questions, only: [:index, :show, :create]
+    end
+  end
+
   resources :users, only: [:create, :new]
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
