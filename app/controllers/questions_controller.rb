@@ -32,6 +32,16 @@ class QuestionsController < ApplicationController
     @question = Question.new question_params
     @question.user = current_user
     if @question.save
+      if @question.tweet_this
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+          config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+          config.access_token        = current_user.oauth_token
+          config.access_token_secret = current_user.oauth_secret
+        end
+        client.update @question.title
+      end
+
       # redirect_to question_path({id: @question.id})
       # redirect_to question_path({id: @question})
 
@@ -114,7 +124,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit([:title, :body, tag_ids: []])
+    params.require(:question).permit([:title, :body, :tweet_this, tag_ids: []])
   end
 
   def find_question

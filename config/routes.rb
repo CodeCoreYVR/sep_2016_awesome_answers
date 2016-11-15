@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # get '/' => 'home#index', as: :home
   root 'home#index'
 
+  get '/auth/twitter', as: :sign_in_with_twitter
+  get '/auth/twitter/callback' => 'callbacks#twitter'
+
   namespace :admin do
     resources :questions
   end

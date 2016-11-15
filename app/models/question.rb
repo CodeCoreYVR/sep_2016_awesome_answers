@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+  attr_accessor :tweet_this
+
   belongs_to :user
 
   # This sets up the one to many association from the question model. You always

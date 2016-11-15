@@ -38,6 +38,14 @@
       { multiple: true, class: 'chosen-select' }
     ) %>
   </div>
+
+  <% if !@question.persisted? && current_user.signed_in_with_twitter? %>
+    <div>
+      <%= f.check_box :tweet_this %>
+      <%= f.label :tweet_this %>
+    </div>
+  <% end %>
+
   <%# this will automatically generate a submit button. The label for the button
       will depend on the `@question` variable. If @question is a new instance
       then the label of the button will be `Create #{model name capitalized}`.
