@@ -1,0 +1,9 @@
+<p>Hello <%= @user.full_name %>,</p>
+<p>You got an answer to your questions</p>
+<p>Question title: <%= @question.title %></p>
+<p>The answer: <%= @answer.body %></p>
+<%# we must use `_url` version of the route helper because the email will be
+    accessed outside of our application. %>
+<%= link_to 'Click here to view the question', question_url(@question) %>
+<p>Regards,</p>
+<p>Awesome Answers Team</p>

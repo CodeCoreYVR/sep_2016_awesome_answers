@@ -2,3 +2,5 @@
 # api credentials below
 ENV['TWITTER_CONSUMER_KEY'] = '???'
 ENV['TWITTER_CONSUMER_SECRET'] = '???'
+ENV["EMAIL_USER_NAME"] = '???'
+ENV["EMAIL_PASSWORD"] = '???'

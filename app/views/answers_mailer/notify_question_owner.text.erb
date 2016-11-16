@@ -1,0 +1,9 @@
+Hello <%= @user.full_name %>,
+You got an answer to your questions
+Question title: <%= @question.title %>
+The answer: <%= @answer.body %>
+<%# we must use `_url` version of the route helper because the email will be
+    accessed outside of our application. %>
+<%= question_url(@question) %>
+Regards,
+Awesome Answers Team
