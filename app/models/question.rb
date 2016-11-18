@@ -38,6 +38,15 @@ class Question < ApplicationRecord
   after_initialize :set_defaults
   before_validation :titleize_title
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
+  # def to_param
+  #   # parameterize is a method from Rails that makes any string url friendly
+  #   # by removing special characters and replacing spaces with dashes
+  #   "#{id}-#{title}".parameterize
+  # end
+
   # scope :recent_ten, lambda { limit(10).order(created_at: :desc) }
   def self.recent_ten
     limit(10).order(created_at: :desc)

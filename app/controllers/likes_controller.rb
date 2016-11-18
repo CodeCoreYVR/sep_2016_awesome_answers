@@ -2,7 +2,7 @@ class LikesController < ApplicationController
   before_action :authenticate_user
 
   def create
-    question = Question.find params[:question_id]
+    question = Question.friendly.find params[:question_id]
     like = Like.new(user: current_user, question: question)
 
     if cannot? :like, question

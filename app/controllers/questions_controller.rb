@@ -101,6 +101,8 @@ class QuestionsController < ApplicationController
   # URL: /questions/:id
   # METHOD: PATCH
   def update
+    # if we want to have friendly id update our slug we have to set it it nil
+    @question.slug = nil
     if @question.update question_params
       flash[:notice] = 'Question updated'
       redirect_to question_path(@question)
@@ -128,7 +130,7 @@ class QuestionsController < ApplicationController
   end
 
   def find_question
-    @question = Question.find params[:id]
+    @question = Question.friendly.find params[:id]
   end
 
   def authorize_access

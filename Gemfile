@@ -43,6 +43,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'omniauth-twitter'
 gem 'twitter'
 
+gem 'friendly_id'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
