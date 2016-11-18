@@ -126,7 +126,11 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit([:title, :body, :tweet_this, tag_ids: []])
+    params.require(:question).permit([:title,
+                                      :body,
+                                      :tweet_this,
+                                      :image,
+                                      tag_ids: []])
   end
 
   def find_question

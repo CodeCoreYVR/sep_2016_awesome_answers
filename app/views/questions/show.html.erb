@@ -36,6 +36,12 @@
       Tags: <%= @question.tags.map(&:name).join(', ') %>
     </section>
 
+    <section>
+      <% if @question.image.present? %>
+        <%= image_tag @question.image.url %>
+      <% end %>
+    </section>
+
   </div>
 </div>
 

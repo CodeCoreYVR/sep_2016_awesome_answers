@@ -57,6 +57,9 @@
   <%= f.input :title %>
   <%= f.input :body %>
 
+  <%# if you're not using simple_form you must use `f.file_field` %>
+  <%= f.input :image %>
+
   <div class='form-group'>
     <%= f.collection_select(
       :tag_ids, Tag.all, :id, :name, {},

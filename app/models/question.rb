@@ -41,6 +41,12 @@ class Question < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
 
+  # the first argument `:image` in this case is the field in the DB to store the
+  # image information
+  # the second argument: ImageUploader is the class (created inside uploaders
+  # folder) that conatain CarrierWave configuration for uploading our file
+  mount_uploader :image, ImageUploader
+
   # def to_param
   #   # parameterize is a method from Rails that makes any string url friendly
   #   # by removing special characters and replacing spaces with dashes

@@ -46,6 +46,10 @@ gem 'twitter'
 gem 'friendly_id'
 gem 'simple_form'
 
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
