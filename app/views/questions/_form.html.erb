@@ -1,5 +1,4 @@
-<%= @question.errors.full_messages.join(', ') %>
-
+<!-- <%= @question.errors.full_messages.join(', ') %> -->
 <%# We use form_for when we're creating a form related to a Rails model. the
     first argument of the form_for must be an ActiveRecord object.
     if the first argument is a new instance of the ActiveRecord class, for
@@ -11,7 +10,7 @@
     request).
     @question variable is persisted in this case so it will have a title and
     a body so those will be pre-populated in their respective fields %>
-<%= form_for @question do |f| %>
+<!-- <%= form_for @question do |f| %>
   <div>
     <%# we can use f.label and f.text_field to generate a label/text input group
         in this case `title` must be an attribute for the variable you pass to
@@ -52,7 +51,29 @@
       If you're not happy with the label, you can pass the label as a first
       arguement: f.submit 'Create'  %>
   <%= f.submit btn_label %>
+<% end %> -->
+
+<%= simple_form_for @question, html: { class: 'form-vertical' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :body %>
+
+  <div class='form-group'>
+    <%= f.collection_select(
+      :tag_ids, Tag.all, :id, :name, {},
+      { multiple: true, class: 'chosen-select form-control' }
+    ) %>
+  </div>
+
+  <% if !@question.persisted? && current_user.signed_in_with_twitter? %>
+    <%# we must provide an `:as` option for this input because `tweet_this` is
+        not a field in the database so simple form will default to a text field
+        %>
+    <%= f.input :tweet_this, as: :boolean %>
+  <% end %>
+  <%= f.submit btn_label, class: 'btn btn-primary' %>
 <% end %>
+
+
 
 <script>
   $('.chosen-select').chosen({ width: '300px' });

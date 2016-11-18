@@ -44,6 +44,7 @@ gem 'omniauth-twitter'
 gem 'twitter'
 
 gem 'friendly_id'
+gem 'simple_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

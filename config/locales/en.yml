@@ -20,4 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  welcome_message: 'Welcome to Awesome Answers'
   hello: "Hello world"
+  welcome:
+    hello_message: 'Welcome!'
