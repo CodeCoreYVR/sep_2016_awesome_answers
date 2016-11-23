@@ -73,6 +73,7 @@ group :development do
   gem 'pry-rails'
 
   gem 'letter_opener'
+  gem 'rails-erd'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
