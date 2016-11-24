@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # get '/' => 'home#index', as: :home
   root 'home#index'
 
+  match '/delayed_job' => DelayedJobWeb, anchor: false, via: [:get, :post]
+
   get '/auth/twitter', as: :sign_in_with_twitter
   get '/auth/twitter/callback' => 'callbacks#twitter'
 

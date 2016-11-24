@@ -22,6 +22,8 @@ module AwesomeAnswers
     # of just logging it.
     # config.action_controller.action_on_unpermitted_parameters = :raise
 
+    config.active_job.queue_adapter = :delayed_job
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

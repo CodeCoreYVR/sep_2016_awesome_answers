@@ -50,6 +50,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 
+gem 'delayed_job_active_record'
+gem 'sinatra', '2.0.0.beta2'
+gem 'delayed_job_web'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

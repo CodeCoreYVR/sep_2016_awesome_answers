@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        AnswersMailer.notify_question_owner(@answer).deliver_now
+        AnswersMailer.notify_question_owner(@answer).deliver_later
         format.js { render :create_success }
         format.html do
           redirect_to question_path(@question), notice: 'Answer created!'
