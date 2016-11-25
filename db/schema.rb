@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20161123235847) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "followings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["follower_id"], name: "index_followings_on_follower_id", using: :btree
+    t.index ["user_id"], name: "index_followings_on_user_id", using: :btree
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -121,6 +130,8 @@ ActiveRecord::Schema.define(version: 20161123235847) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "followings", "users"
+  add_foreign_key "followings", "users", column: "follower_id"
   add_foreign_key "likes", "questions"
   add_foreign_key "likes", "users"
   add_foreign_key "questions", "users"
